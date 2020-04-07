@@ -11,6 +11,7 @@ var picture = document.getElementById("picture")
 const questionText = document.getElementById("question-text")
 const sendButton = document.getElementById("send-button")
 const userInput = document.getElementById("answer")
+var clickCheck = document.getElementById("click-check");
 
 // Set data
 
@@ -91,6 +92,7 @@ function showChapter() {
 
             change_element_at_audio_time(picture, 'opacity', 1, 5);
             change_element_at_audio_time(picture, 'change_image', "Bilder/front.jpg", 5);
+            change_element_at_audio_time(clickCheck, 'innerHTML', 'Y', 5)
             break;
 
         case 2: // OSLO
@@ -511,18 +513,19 @@ function checkInput() {
         updateCounter();
 
     }else if (chapterNumber == 1){
+        if (clickCheck.innerHTML == 'Y'){
         fade_out_intro_audio();
         // Hide elements
         picture.style.opacity = 0;
         userInput.style.opacity = 0;
         sendButton.style.opacity = 0;
         //questionText.style.opacity = 0;
-
         updateCounter();
-
+        }
     }else {
         // Check that input is correct 
         answerGiven = userInput.value;
+        checkAnswer();
     }
 
 }
