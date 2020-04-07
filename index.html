@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <title> Påskerebus 2020 </title>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8" />
+
+</head>
+
+</html>
+
+<body>
+    <div class="container">
+
+        <!-- Main container for data on page-->
+        <div class="main-board">
+            <div class="topbar">
+            </div>
+
+            <div class="location">
+                <span id=location-text style="opacity: 0;"> Påskerebus 2020</span>
+            </div>
+            <div class="info">
+                <div id="picture" style="opacity: 0;">
+                    <img src="Bilder/front.jpg" />
+                </div>
+            </div>
+
+            <div class="audio-player">
+                <audio controls id="audiocontroller">
+                    <source src="" type="audio/mpeg"
+                        autostart="0" style= "visibility: hidden;">
+                </audio>
+            </div>
+
+            <div class="progress">
+                <span id=main-text  style="opacity: 0">Denne siden gjør seg best på en PC, ikke mobil. </br>Sett deg ned. Gjør deg klar. Tar du utfordringen?</span>
+            </div>
+
+
+            <div class="question">
+                <span id=question-text style="opacity: 0">Husk å ha lyden skrudd på.</span>
+            </div>
+            <div class="answerbox">
+                <input type="text" id="answer">
+                <button id="send-button"  style="opacity: 0">Åpne påskeegget</button>
+                <i></i>
+            </div>
+
+        </div>
+        <div class="audio-player-intro">
+            <audio controls id="audiocontroller-intro">
+                <source src="Lydfiler/Damaged_song.mp3" type="audio/mpeg"
+                autostart="0" style= "visibility: hidden;">
+            </audio>
+        </div>
+
+
+    </div>
+
+
+    <script src="app.js"> </script>
+
+</body>
+
+</html>
