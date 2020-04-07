@@ -13,6 +13,7 @@ const sendButton = document.getElementById("send-button")
 const userInput = document.getElementById("answer")
 
 // Set data
+audioPlayerIntro.src = "Lydfiler/Damaged_song.mp3"
 audioPlayerIntro.play(); // Start intro background music
 
 // Hide some stuff from UI
