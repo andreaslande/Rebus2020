@@ -87,7 +87,7 @@ function showChapter() {
             change_element_at_audio_time(mainText, 'opacity', 0, 1)
             change_element_at_audio_time(questionText, 'opacity', 0, 5)
             change_element_at_audio_time(picture, 'opacity', 1, 35);
-            change_element_at_audio_time(picture, 'change_image', "Bilder/start.jpg", 7);
+            change_element_at_audio_time(picture, 'change_image', "Bilder/start.jpg", 10);
 
             change_element_at_audio_time(locationText, 'innerHTML', 'Oslo, Norge', 6)
             change_element_at_audio_time(locationText, 'opacity', 1, 8)
