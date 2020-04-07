@@ -83,7 +83,7 @@ function showChapter() {
             audioPlayer.play();
             
             change_element_at_audio_time(mainText, 'opacity', 0, 1)
-            change_element_at_audio_time(mainText, 'innerHTML', "Hører du musikk nå? </br> Hvis ikke har du ikke deaktivert Adblock. Forsøk en annen nettleser.", 5)
+            change_element_at_audio_time(mainText, 'innerHTML', "Hører du musikk nå? Hvis ja: Sett deg ned. Gjør deg klar. </br> Hvis ikke: Da har du muligens ikke deaktivert Adblock. Forsøk en annen nettleser.", 5)
             change_element_at_audio_time(mainText, 'opacity', 1, 5)
 
             change_element_at_audio_time(sendButton, 'opacity', 0, 1)
