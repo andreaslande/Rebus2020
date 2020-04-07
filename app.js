@@ -200,7 +200,7 @@ function showChapter() {
         case 6: // SULINA
             // Setup new sound file
             audioPlayer.src = "Lydfiler/transylvania.mp3"
-            correct_answer = ['helsinki'];
+            correct_answer = ['helsinki','helsingfors'];
 
             // Rset screen
             audioPlayer.play();
@@ -264,12 +264,13 @@ function showChapter() {
 
 
             audioPlayer.src = "Lydfiler/pet_ferdig.mp3"
-            correct_answer = ['bali', 'indonesia'];
+            correct_answer = ['bali'];
             resetScreenForNewChapter();
 
             // Fade out previous chapter
             change_element_at_audio_time(picture, 'opacity', 1, 10);
             change_element_at_audio_time(picture, 'change_image', "Bilder/pet_1.jpg", 6);
+            change_element_at_audio_time(audioPlayer, 'opacity', 1, 3);
 
             // Present new elements
             mainText.innerHTML = '</br> Politibamsen: Ja! Det gir mening. Jeg reiser dit med en gang.';
