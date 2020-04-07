@@ -31,7 +31,7 @@ userInput.value = "";
 
 function updateCounter() {
     // The correct answere is given, and so the chapter number is updated.
-    ichapterNumber = chapterNumber + 1 // Increase level num by one
+    chapterNumber = chapterNumber + 1 // Increase level num by one
     userInput.value = "";
     showChapter();
 
