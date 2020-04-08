@@ -244,6 +244,9 @@ function showChapter() {
 
             // Specify times where elements appear or dissapear
             mainText.innerHTML = '</br> Politibamsen: Ja! Det gir mening. Jeg reiser dit med en gang.';
+            change_element_at_audio_time(questionText, 'opacity', 0, 0)
+            change_element_at_audio_time(questionText, 'innerHTML', "Hvor skal Politibamsen reise?", 4)
+            change_element_at_audio_time(questionText, 'opacity', 1, 4);
             change_element_at_audio_time(mainText, 'opacity', 1, 0);
             change_element_at_audio_time(mainText, 'opacity', 0, 5);
             change_element_at_audio_time(locationText, 'opacity', 1, 6)
