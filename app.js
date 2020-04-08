@@ -1,9 +1,10 @@
+// Javascript app running the code for the påskerebus 2020
+
 // Define variables
 var chapterNumber = 0; // The stage of the rebus
-var questionHasChanged = 0;
-var userName = ''
-var answerGiven = ''
-const mainText = document.getElementById("main-text")
+var questionHasChanged = 0; // Used for resetting the questionText if it has been changed during a chapter
+var answerGiven = ''; // Answer given by user
+const mainText = document.getElementById("main-text");
 const locationText = document.getElementById("location-text")
 var audioPlayer = document.getElementById("audiocontroller")
 var audioPlayerIntro = document.getElementById("audiocontroller-intro")
@@ -11,16 +12,14 @@ var picture = document.getElementById("picture")
 const questionText = document.getElementById("question-text")
 const sendButton = document.getElementById("send-button")
 const userInput = document.getElementById("answer")
-var clickCheck = document.getElementById("click-check");
-
-// Set data
+var clickCheck = document.getElementById("click-check"); // Empty div element used to prohibit the user to double click in the first page 
 
 // Hide some stuff from UI
 audioPlayer.style.visibility = "hidden";
 questionText.style.visibility = "visible";
 
 // Make all elements appear on page load
-//picture.style.opacity = 1; // It is default set to zero so this will elicit a gradual fade in when page is loaded.
+// These are by default set to zero so this will elicit a gradual fade in when page is loaded.
 locationText.style.opacity = 1;
 sendButton.style.opacity = 1;
 mainText.style.opacity = 1;
@@ -45,7 +44,7 @@ function change_element_at_audio_time(element, task, value, at_time) {
         if (!triggered && audioPlayer.currentTime >= at_time) {
             triggered = true;
 
-            // Based on task; update HTML element value
+            // Based on "task"; update HTML element value
             if (task == 'innerHTML') {
                 element.innerHTML = value;
                 clearInterval(interval);
@@ -81,7 +80,7 @@ function showChapter() {
             audioPlayerIntro.play(); // Start intro background music
             audioPlayer.src = "Lydfiler/stille.mp3";
             audioPlayer.play();
-            
+
             change_element_at_audio_time(mainText, 'opacity', 0, 1)
             change_element_at_audio_time(mainText, 'innerHTML', "Hører du musikk nå? Hvis ja: Sett deg ned. Gjør deg klar. </br> Hvis ikke: Da har du muligens ikke deaktivert Adblock. Forsøk en annen nettleser.", 5)
             change_element_at_audio_time(mainText, 'opacity', 1, 5)
@@ -200,17 +199,15 @@ function showChapter() {
         case 6: // SULINA
             // Setup new sound file
             audioPlayer.src = "Lydfiler/transylvania.mp3"
-            correct_answer = ['helsinki','helsingfors'];
+            correct_answer = ['helsinki', 'helsingfors'];
+            audioPlayer.play(); // Required in this chapter because resetScreenForNewChapter() is not executed.
 
-            // Rset screen
-            audioPlayer.play();
+            // Specify times where elements appear or dissapear
             change_element_at_audio_time(locationText, 'opacity', 0, 1)
             change_element_at_audio_time(picture, 'opacity', 0, 1);
             change_element_at_audio_time(questionText, 'opacity', 0, 0)
             change_element_at_audio_time(questionText, 'innerHTML', "Hvilken by skal Politibamsen reise til?", 4)
             change_element_at_audio_time(questionText, 'opacity', 1, 4);
-
-            // Fade out previous chapter
             change_element_at_audio_time(picture, 'opacity', 1, 10);
             change_element_at_audio_time(picture, 'change_image', "Bilder/pb_kjorer.jpg", 6);
 
@@ -221,17 +218,17 @@ function showChapter() {
             change_element_at_audio_time(locationText, 'opacity', 1, 7)
             change_element_at_audio_time(locationText, 'innerHTML', "Transylvania, Romania", 7);
 
-            // turn off car image: 0:50
+            // Fade out the car image: 0:50
             change_element_at_audio_time(picture, 'opacity', 0, 50);
 
-            // Show bamse walk into castle at 1:08
+            // Show image of bamse walking into castle at 1:08
             change_element_at_audio_time(picture, 'change_image', "Bilder/slott.jpg", 56);
             change_element_at_audio_time(picture, 'opacity', 1, 68);
 
-            // Cut to black at 1:20
+            // Cut to black image at 1:20
             change_element_at_audio_time(picture, 'change_image', "Bilder/slott_sort.jpg", 80);
 
-            // show blood at 1:30
+            // Show blood image at 1:30
             change_element_at_audio_time(picture, 'change_image', "Bilder/slott_blod.jpg", 90);
 
             break;
@@ -240,12 +237,12 @@ function showChapter() {
 
         case 7: // HELSINKI
 
-            // MOTTAR SMS FRA EMMA
             audioPlayer.src = "Lydfiler/sms_hell.mp3";
             correct_answer = ['petra'];
 
             resetScreenForNewChapter();
-            // Present new elements
+
+            // Specify times where elements appear or dissapear
             mainText.innerHTML = '</br> Politibamsen: Ja! Det gir mening. Jeg reiser dit med en gang.';
             change_element_at_audio_time(mainText, 'opacity', 1, 0);
             change_element_at_audio_time(mainText, 'opacity', 0, 5);
@@ -330,11 +327,10 @@ function showChapter() {
 
         case 11: // ST MARTIN
             audioPlayer.src = "Lydfiler/st_lyd.mp3"
-            correct_answer = ['washington', 'washingeteon', 'washington dc'];
+            correct_answer = ['washington'];
             resetScreenForNewChapter();
-            change_element_at_audio_time(audioPlayer, 'opacity', 1, 1);
 
-            // Fade out previous chapter
+            change_element_at_audio_time(audioPlayer, 'opacity', 1, 1);
             change_element_at_audio_time(picture, 'opacity', 1, 10);
             change_element_at_audio_time(picture, 'change_image', "Bilder/bamse_i_st.jpg", 6);
 
@@ -345,7 +341,7 @@ function showChapter() {
             change_element_at_audio_time(locationText, 'opacity', 1, 7)
             change_element_at_audio_time(locationText, 'innerHTML', "Marigot, St. Martin", 7);
 
-            // Picture of chemi at 1:55
+            // Picture of puzzel at 1:55
             change_element_at_audio_time(picture, 'opacity', 0, 110);
             change_element_at_audio_time(picture, 'change_image', "Bilder/mendelejev.jpg", 115);
             change_element_at_audio_time(picture, 'opacity', 1, 115);
@@ -367,10 +363,7 @@ function showChapter() {
             change_element_at_audio_time(mainText, 'opacity', 0, 5);
             change_element_at_audio_time(locationText, 'opacity', 1, 7)
             change_element_at_audio_time(locationText, 'innerHTML', "Washington DC, USA", 7);
-
-
             break;
-
 
         case 13: // MIAMI
 
@@ -395,16 +388,12 @@ function showChapter() {
 
         case 14: // MEDELLIN
 
-
             audioPlayer.src = "Lydfiler/stille.mp3";
             correct_answer = ['antofagasta'];
-
             resetScreenForNewChapter();
 
-            change_element_at_audio_time(audioPlayer, 'opacity', 1, 1);
-
-
             // Present new elements
+            change_element_at_audio_time(audioPlayer, 'opacity', 1, 1);
             mainText.innerHTML = '</br> Politibamsen: Selvsagt! Jeg reiser dit med en gang.';
             change_element_at_audio_time(mainText, 'opacity', 1, 0);
             change_element_at_audio_time(mainText, 'opacity', 0, 5);
@@ -420,9 +409,7 @@ function showChapter() {
         case 15: // ANTOFAGASTA
             audioPlayer.src = "Lydfiler/baatscene_ferdig.mp3"
             correct_answer = ['påskeøya', 'rapa nui'];
-
-            // Rset screen
-            audioPlayer.play();
+            audioPlayer.play(); // Required in this chapter because resetScreenForNewChapter() is not executed.
 
             change_element_at_audio_time(locationText, 'opacity', 0, 1)
             change_element_at_audio_time(picture, 'opacity', 0, 1);
@@ -441,23 +428,25 @@ function showChapter() {
             change_element_at_audio_time(locationText, 'opacity', 1, 6)
             change_element_at_audio_time(locationText, 'innerHTML', "Antofagasta, Chile", 6);
 
-            // fade out image
+            // Fade out image of boat
             change_element_at_audio_time(picture, 'opacity', 0, 55);
             change_element_at_audio_time(locationText, 'opacity', 0, 60)
-            // fade in beach image
+
+            // Fade in beach image
             change_element_at_audio_time(picture, 'change_image', "Bilder/rapa.jpg", 90);
             change_element_at_audio_time(picture, 'opacity', 1, 100);
 
-            // turn of answer for a while
+            // Turn off the answer input field and button for a while
             change_element_at_audio_time(userInput, 'opacity', 0, 1)
             change_element_at_audio_time(sendButton, 'opacity', 0, 1)
             change_element_at_audio_time(userInput, 'opacity', 1, 102)
             change_element_at_audio_time(sendButton, 'opacity', 1, 102)
             break;
 
-        case 16: // FERDIG
+        case 16: // FINAL
+
             audioPlayer.src = "Lydfiler/stille.mp3"
-            correct_answer = ['påskeøya', 'rapa nui','påskeøyene'];
+            correct_answer = ['påskeøya', 'rapa nui', 'påskeøyene'];
             audioPlayer.style.visibility = "hidden";
             resetScreenForNewChapter();
             audioPlayerIntro.volume = 0.8;
@@ -472,7 +461,7 @@ function showChapter() {
             change_element_at_audio_time(locationText, 'opacity', 1, 6)
             change_element_at_audio_time(locationText, 'innerHTML', "Påskeøya", 6);
 
-            // FAde out gui
+            // Fade out UI
             change_element_at_audio_time(audioPlayer, 'opacity', 0, 1);
             change_element_at_audio_time(userInput, 'opacity', 0, 1)
             change_element_at_audio_time(sendButton, 'opacity', 0, 1)
@@ -510,20 +499,21 @@ function checkInput() {
     // Check that user input is correct in relation to the current stage
 
     // For a new start
-    if (chapterNumber == 0){
+    if (chapterNumber == 0) {
         updateCounter();
 
-    }else if (chapterNumber == 1){
-        if (clickCheck.innerHTML == 'Y'){
-        fade_out_intro_audio();
-        // Hide elements
-        picture.style.opacity = 0;
-        userInput.style.opacity = 0;
-        sendButton.style.opacity = 0;
-        //questionText.style.opacity = 0;
-        updateCounter();
+    } else if (chapterNumber == 1) {
+        if (clickCheck.innerHTML == 'Y') {
+            fade_out_intro_audio();
+
+            // Hide elements
+            picture.style.opacity = 0;
+            userInput.style.opacity = 0;
+            sendButton.style.opacity = 0;
+            
+            updateCounter();
         }
-    }else {
+    } else {
         // Check that input is correct 
         answerGiven = userInput.value;
         checkAnswer();
@@ -532,11 +522,11 @@ function checkInput() {
 }
 
 function checkAnswer() {
-
+    // Check that the answer given as input is correct
     if (correct_answer.includes(answerGiven.toLowerCase())) {
-        updateCounter();
+        updateCounter(); // step forward
     } else {
-        tellAnswerWasWrong();
+        tellAnswerWasWrong(); // Not correct
     }
 }
 
@@ -547,11 +537,11 @@ function tellAnswerWasWrong() {
     } else {
         userInput.value = '';
         questionText.innerHTML = 'Hmmm... Nei, det kan nok ikke stemme. Forsøk noe annet.';
-        //questionText.innerHTML = answerGiven + ' er feil. Hvor skal Politibamsen reise?';
     }
 }
 
 function fade_out_intro_audio() {
+    // Function to fade out the background music in the intro.
     let timer
     if (audioPlayerIntro.volume > 0) {
         audioPlayerIntro.volume -= 0.0015;
@@ -561,7 +551,7 @@ function fade_out_intro_audio() {
 
 function main() {
 
-    // If user clicks SEND button or ENTER; see if input is correct
+    // If user clicks the button or ENTER (keyboard) then check input given.
     sendButton.addEventListener("click", function () {
         checkInput();
     })
