@@ -136,7 +136,7 @@ function showChapter() {
 
             // Setup new sound file
             audioPlayer.src = "Lydfiler/2_ferdig.mp3"
-            correct_answer = ['windsorhagen 32', '32 windsor gardens', '32 windsor garden', 'windsor hagen 32', 'windsorhagen', 'windsor garden'];
+            correct_answer = ['windsorhagen 32', '32 windsor gardens', '32 windsor garden', 'windsor hagen 32', 'windsorhagen', 'windsor garden', 'windsorhagene 32'];
             resetScreenForNewChapter();
 
             // Fade out previous chapter
