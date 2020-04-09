@@ -660,6 +660,8 @@ function main() {
             findChapterNumber(answerGiven);
             if (chapterNumber > 0) {
                 goToLocation = 0;
+                sendButton.innerHTML = "Neste";
+
                 updateCounter();
             }
         } else {
@@ -681,6 +683,7 @@ function main() {
                 findChapterNumber(answerGiven);
                 if (chapterNumber > 0) {
                     goToLocation = 0;
+                    sendButton.innerHTML = "Neste";
                     updateCounter();
                 };
             } else {
