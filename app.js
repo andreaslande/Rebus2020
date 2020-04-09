@@ -83,6 +83,7 @@ function showChapter() {
             audioPlayerIntro.play(); // Start intro background music
             audioPlayer.src = "Lydfiler/stille.mp3";
             audioPlayer.play();
+            skipButton.style.opacity = 0;
 
             change_element_at_audio_time(mainText, 'opacity', 0, 1)
             change_element_at_audio_time(mainText, 'innerHTML', "Hører du musikk nå? </br> Hvis ikke: Forsøk å deaktivere Adblock eller forsøk en annen nettleser.", 5)
@@ -91,7 +92,7 @@ function showChapter() {
             change_element_at_audio_time(sendButton, 'opacity', 0, 1)
             change_element_at_audio_time(sendButton, 'innerHTML', 'Ja! Åpne påskeegget', 5)
             change_element_at_audio_time(sendButton, 'opacity', 1, 5)
-
+            change_element_at_audio_time(skipButton,'visibility',0,5);
             change_element_at_audio_time(picture, 'opacity', 1, 5);
             change_element_at_audio_time(picture, 'change_image', "Bilder/front.jpg", 5);
             change_element_at_audio_time(clickCheck, 'innerHTML', 'Y', 5)
