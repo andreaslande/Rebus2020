@@ -13,6 +13,8 @@ const questionText = document.getElementById("question-text")
 const sendButton = document.getElementById("send-button")
 const userInput = document.getElementById("answer")
 var clickCheck = document.getElementById("click-check"); // Empty div element used to prohibit the user to double click in the first page 
+var skipButton = document.getElementById("skip-button");
+var goToLocation = 0;
 
 // Hide some stuff from UI
 audioPlayer.style.visibility = "hidden";
@@ -22,6 +24,7 @@ questionText.style.visibility = "visible";
 // These are by default set to zero so this will elicit a gradual fade in when page is loaded.
 locationText.style.opacity = 1;
 sendButton.style.opacity = 1;
+skipButton.style.opacity = 1;
 mainText.style.opacity = 1;
 questionText.style.opacity = 1;
 
@@ -138,6 +141,7 @@ function showChapter() {
             audioPlayer.src = "Lydfiler/2_ferdig.mp3"
             correct_answer = ['windsorhagen 32', '32 windsor gardens', '32 windsor garden', 'windsor hagen 32', 'windsorhagen', 'windsor garden', 'windsorhagene 32'];
             resetScreenForNewChapter();
+            change_element_at_audio_time(audioPlayer, 'opacity', 1, 5);
 
             // Fade out previous chapter
             change_element_at_audio_time(picture, 'opacity', 1, 6);
@@ -162,6 +166,7 @@ function showChapter() {
             audioPlayer.src = "Lydfiler/3_ferdig.mp3"
             correct_answer = ['neuilly', 'neuilly-sur-seine', 'neuilly sur seine'];
             resetScreenForNewChapter();
+            change_element_at_audio_time(audioPlayer, 'opacity', 1, 5);
 
             // Fade out previous chapter
             change_element_at_audio_time(picture, 'opacity', 1, 6);
@@ -186,6 +191,7 @@ function showChapter() {
             // Fade out previous chapter
             change_element_at_audio_time(picture, 'opacity', 1, 15);
             change_element_at_audio_time(picture, 'change_image', "Bilder/tysk.jpg", 7);
+            change_element_at_audio_time(audioPlayer, 'opacity', 1, 5);
 
             // Present new elements
             mainText.innerHTML = '</br> Politibamsen: Aha! Det er der han bodde? Jeg reiser dit med en gang.';
@@ -201,6 +207,8 @@ function showChapter() {
             audioPlayer.src = "Lydfiler/transylvania.mp3"
             correct_answer = ['helsinki', 'helsingfors'];
             audioPlayer.play(); // Required in this chapter because resetScreenForNewChapter() is not executed.
+            change_element_at_audio_time(audioPlayer, 'opacity', 1, 15); // set to 15
+            change_element_at_audio_time(audioPlayer, 'visibility', 1, 10);           // set to 10  
 
             // Specify times where elements appear or dissapear
             change_element_at_audio_time(locationText, 'opacity', 0, 1)
@@ -356,7 +364,7 @@ function showChapter() {
             audioPlayer.src = "Lydfiler/usa.mp3"
             correct_answer = ['miami'];
             resetScreenForNewChapter();
-
+            change_element_at_audio_time(audioPlayer, 'opacity', 1, 5);
             change_element_at_audio_time(picture, 'opacity', 1, 50);
             change_element_at_audio_time(picture, 'change_image', "Bilder/latin.jpg", 6);
 
@@ -396,7 +404,7 @@ function showChapter() {
             resetScreenForNewChapter();
 
             // Present new elements
-            change_element_at_audio_time(audioPlayer, 'opacity', 1, 1);
+            change_element_at_audio_time(audioPlayer, 'opacity', 0, 1);
             mainText.innerHTML = '</br> Politibamsen: Selvsagt! Jeg reiser dit med en gang.';
             change_element_at_audio_time(mainText, 'opacity', 1, 0);
             change_element_at_audio_time(mainText, 'opacity', 0, 5);
@@ -449,11 +457,12 @@ function showChapter() {
         case 16: // FINAL
 
             audioPlayer.src = "Lydfiler/stille.mp3"
-            correct_answer = ['påskeøya', 'rapa nui','isla de pascua','hanga roa'];
+            correct_answer = ['påskeøya', 'rapa nui', 'isla de pascua', 'hanga roa'];
             audioPlayer.style.visibility = "hidden";
             resetScreenForNewChapter();
             audioPlayerIntro.volume = 0.8;
             audioPlayerIntro.currentTime = 1;
+            audioPlayerIntro.src = "Lydfiler/rapa.mp3";
             audioPlayerIntro.play();
 
             // Present new elements
@@ -476,6 +485,7 @@ function showChapter() {
             break;
 
         default:
+
             break;
     }
 
@@ -513,7 +523,7 @@ function checkInput() {
             picture.style.opacity = 0;
             userInput.style.opacity = 0;
             sendButton.style.opacity = 0;
-            
+
             updateCounter();
         }
     } else {
@@ -552,20 +562,132 @@ function fade_out_intro_audio() {
     }
 }
 
+function askForLocation() {
+    // Ask user where to skip to
+    if (chapterNumber == 0) {
+
+        skipButton.style.opacity = 0;
+        userInput.style.visibility = "visible";
+        userInput.style.opacity = 1;
+        questionText.innerHTML = "Hvor var du sist?";
+        goToLocation = 1;
+    }
+
+}
+
+function findChapterNumber(answer) {
+    questionHasChanged = 1;
+    audioPlayer.style.visibility = 'visible';
+
+    switch (answer) {
+
+        case 'london':
+            chapterNumber = 2;
+            break;
+
+        case 'windsorhagen 32':
+        case '32 windsor gardens':
+        case '32 windsor garden':
+        case 'windsor hagen 32':
+        case 'windsorhagen':
+        case 'windsor garden':
+        case 'windsorhagene 32':
+            chapterNumber = 3;
+            break;
+
+        case 'neuilly sur seine':
+        case 'neuilly-sur-seine':
+            chapterNumber = 4;
+            break;
+
+        case 'sulina':
+            chapterNumber = 5;
+            break;
+        case 'helsingfors':
+        case 'helsinki':
+            chapterNumber = 6;
+            break;
+
+        case 'petra':
+            chapterNumber = 7;
+            break;
+        case 'bali':
+            chapterNumber = 8;
+            break;
+        case 'abkhazia':
+        case 'abkhasia':
+            chapterNumber = 9;
+            break;
+        case 'marigot':
+            chapterNumber = 10;
+            break;
+        case 'washington':
+            chapterNumber = 11;
+            break;
+        case 'miami':
+            chapterNumber = 12;
+            break;
+        case 'medellin':
+        case 'medellín':
+            chapterNumber = 13;
+            break;
+
+        case 'antofagasta':
+            chapterNumber = 14;
+            break;
+
+        case 'påskeøya':
+        case 'rapa nui':
+        case 'isla de pascua':
+        case 'hanga roa':   
+            chapterNumber = 15;
+            break;
+        default:
+            break;
+    }
+
+}
+
+
 function main() {
 
     // If user clicks the button or ENTER (keyboard) then check input given.
     sendButton.addEventListener("click", function () {
-        checkInput();
-    })
+        if (goToLocation == 1) {
+
+            answerGiven = userInput.value;
+            findChapterNumber(answerGiven);
+            if (chapterNumber > 0) {
+                goToLocation = 0;
+                updateCounter();
+            }
+        } else {
+            checkInput();
+        }
+
+    });
+
+    skipButton.addEventListener("click", function () {
+        askForLocation();
+    });
 
     userInput.addEventListener("keyup", function (e) {
         if (e.keyCode == 13) {
-            checkInput();
-        }
+            if (goToLocation == 1) {
+
+                
+                answerGiven = userInput.value;
+                findChapterNumber(answerGiven);
+                if (chapterNumber > 0) {
+                    goToLocation = 0;
+                    updateCounter();
+                };
+            } else {
+                checkInput();
+            };
+        };
     });
 
-
-}
+};
 
 main();
