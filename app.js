@@ -449,7 +449,7 @@ function showChapter() {
         case 16: // FINAL
 
             audioPlayer.src = "Lydfiler/stille.mp3"
-            correct_answer = ['påskeøya', 'rapa nui', 'påskeøyene'];
+            correct_answer = ['påskeøya', 'rapa nui','isla de pascua','hanga roa'];
             audioPlayer.style.visibility = "hidden";
             resetScreenForNewChapter();
             audioPlayerIntro.volume = 0.8;
@@ -462,7 +462,7 @@ function showChapter() {
             change_element_at_audio_time(picture, 'opacity', 1, 6);
             change_element_at_audio_time(picture, 'change_image', "Bilder/ferdig.jpg", 6);
             change_element_at_audio_time(locationText, 'opacity', 1, 6)
-            change_element_at_audio_time(locationText, 'innerHTML', "Påskeøya", 6);
+            change_element_at_audio_time(locationText, 'innerHTML', "Rapa Nui, Påskeøya", 6);
 
             // Fade out UI
             change_element_at_audio_time(audioPlayer, 'opacity', 0, 1);
