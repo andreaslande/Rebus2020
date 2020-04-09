@@ -579,8 +579,8 @@ function askForLocation() {
 function findChapterNumber(answer) {
     questionHasChanged = 1;
     audioPlayer.style.visibility = 'visible';
-
-    switch (answer.toLowerCase()) {
+    answer = answer.toLowerCase();
+    switch (answer) {
 
         case 'london':
             chapterNumber = 2;
