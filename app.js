@@ -580,7 +580,7 @@ function findChapterNumber(answer) {
     questionHasChanged = 1;
     audioPlayer.style.visibility = 'visible';
 
-    switch (answer) {
+    switch (answer.toLowerCase()) {
 
         case 'london':
             chapterNumber = 2;
@@ -661,7 +661,6 @@ function main() {
             if (chapterNumber > 0) {
                 goToLocation = 0;
                 sendButton.innerHTML = "Neste";
-
                 updateCounter();
             }
         } else {
